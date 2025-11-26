@@ -45,4 +45,8 @@ public class UserService {
             return true;
         }
     }
+
+    public List<User> getUsersWithSpecificDomain(String emailDomain){
+        return userRepository.getUsersWithSpecificEmail(emailDomain);
+    }
 }
