@@ -76,4 +76,14 @@ public class PostController {
             return ResponseEntity.status(400).body(new ApiResponse("There are no post with this id found"));
         }
     }
+
+    @GetMapping("get-posts-by-user-id/{userId}")
+    public ResponseEntity<?> getPostsByUserId(@PathVariable Integer userId){
+        List<Post> posts= postService.getPostsByUserId(userId);
+        if (posts.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no post with this user id"));
+        }else {
+            return ResponseEntity.status(200).body(posts);
+        }
+    }
 }

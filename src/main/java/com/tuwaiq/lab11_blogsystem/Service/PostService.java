@@ -73,4 +73,8 @@ public class PostService {
             return true;
         }
     }
+
+    public List<Post> getPostsByUserId(Integer userId){
+        return postRepository.getPostsByUserId(userId);
+    }
 }
