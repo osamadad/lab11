@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -81,7 +82,16 @@ public class PostController {
     public ResponseEntity<?> getPostsByUserId(@PathVariable Integer userId){
         List<Post> posts= postService.getPostsByUserId(userId);
         if (posts.isEmpty()){
-            return ResponseEntity.status(400).body(new ApiResponse("There are no post with this user id"));
+            return ResponseEntity.status(400).body(new ApiResponse("There are no posts with this user id"));
+        }else {
+            return ResponseEntity.status(200).body(posts);
+        }
+    }
+
+    public ResponseEntity<?> getPostsBeforeDate(@PathVariable LocalDateTime dateTime){
+        List<Post> posts=postService.getPostsBeforeDate(dateTime);
+        if (posts.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no posts before this date"));
         }else {
             return ResponseEntity.status(200).body(posts);
         }

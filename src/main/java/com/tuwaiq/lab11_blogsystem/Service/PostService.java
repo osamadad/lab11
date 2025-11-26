@@ -77,4 +77,8 @@ public class PostService {
     public List<Post> getPostsByUserId(Integer userId){
         return postRepository.getPostsByUserId(userId);
     }
+
+    public List<Post> getPostsBeforeDate(LocalDateTime dateTime){
+        return postRepository.getPostsBeforeDate(dateTime);
+    }
 }
