@@ -18,4 +18,8 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
 
     @Query("select posts from Post posts where posts.publishDate<?1")
     List<Post> getPostsBeforeDate(LocalDateTime dateTime);
+
+    List<Post> getPostsByCategoryId(Integer categoryId);
+
+    List<Post> findPostsByTitleContaining(String title);
 }

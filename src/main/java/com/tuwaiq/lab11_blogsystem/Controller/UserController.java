@@ -70,4 +70,13 @@ public class UserController {
         }
     }
 
+    @GetMapping("/get-user-by-name-contain/{name}")
+    public ResponseEntity<?> getUsersByUsernameContain(@PathVariable String name){
+        List<User> users=userService.getUserByUsernameContaining(name);
+        if (users.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no users with username that contain this name"));
+        }else {
+            return ResponseEntity.status(200).body(users);
+        }
+    }
 }

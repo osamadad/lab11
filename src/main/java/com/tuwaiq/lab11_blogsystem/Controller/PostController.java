@@ -88,10 +88,31 @@ public class PostController {
         }
     }
 
+    @GetMapping("/get-before-date/{dateTime}")
     public ResponseEntity<?> getPostsBeforeDate(@PathVariable LocalDateTime dateTime){
         List<Post> posts=postService.getPostsBeforeDate(dateTime);
         if (posts.isEmpty()){
             return ResponseEntity.status(400).body(new ApiResponse("There are no posts before this date"));
+        }else {
+            return ResponseEntity.status(200).body(posts);
+        }
+    }
+
+    @GetMapping("/get-posts-by-category-id/{categoryId}")
+    public ResponseEntity<?> getPostsByCategoryId(@PathVariable Integer categoryId){
+        List<Post> posts=postService.getPostsByCategoryId(categoryId);
+        if (posts.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no posts with this category"));
+        }else {
+            return ResponseEntity.status(200).body(posts);
+        }
+    }
+
+    @GetMapping("/get-posts-by-title-contain/{title}")
+    public ResponseEntity<?> getPostsByTitleContain(@PathVariable String title){
+        List<Post> posts=postService.getPostsByTitleContain(title);
+        if (posts.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no posts with title containing this part"));
         }else {
             return ResponseEntity.status(200).body(posts);
         }
