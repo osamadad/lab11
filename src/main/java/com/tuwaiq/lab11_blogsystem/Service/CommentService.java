@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -73,4 +74,20 @@ public class CommentService {
             return true;
         }
     }
+
+    public List<Comment> getAllCommentByPostId(Integer postId){
+        return commentRepository.findCommentByPostId(postId);
+    }
+
+    public List<Comment> getAllCommentByUserId(Integer userId){
+        return commentRepository.findCommentByUserId(userId);
+    }
+
+//    public List<Comment> getBadComment(){
+//        List<Comment> comments=commentRepository.findAll();
+//        List<String> badWords=new ArrayList<>(List.of("lie","bad"));
+//        for (Comment comment:comments){
+//            if (comment.getContent().contains(badWords));
+//        }
+//    }
 }

@@ -23,7 +23,6 @@ public class Comment {
     @Size(min = 3,max = 50, message = "Sorry, the content can't be less than 3 or longer than 50 characters, please try again")
     @Column(columnDefinition = "varchar(50) not null")
     private String content;
-    @NotNull(message = "Sorry, the comment date can't be empty, please try again")
     @DateTimeFormat(pattern = "yyyy-MM-dd@HH-mm-ss")
     @Column(columnDefinition = "datetime not null")
     private LocalDateTime commentDate;

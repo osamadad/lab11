@@ -60,5 +60,23 @@ public class UserController {
         }
     }
 
+    @GetMapping("/get-user-with-specific-domain/{emailDomain}")
+    public ResponseEntity<?> getUsersWithSpecificEmail(@PathVariable String emailDomain){
+        List<User> users=userService.getUsersWithSpecificDomain(emailDomain);
+        if (users.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no users with this email domain found"));
+        }else {
+            return ResponseEntity.status(200).body(users);
+        }
+    }
 
+    @GetMapping("/get-user-by-name-contain/{name}")
+    public ResponseEntity<?> getUsersByUsernameContain(@PathVariable String name){
+        List<User> users=userService.getUserByUsernameContaining(name);
+        if (users.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no users with username that contain this name"));
+        }else {
+            return ResponseEntity.status(200).body(users);
+        }
+    }
 }

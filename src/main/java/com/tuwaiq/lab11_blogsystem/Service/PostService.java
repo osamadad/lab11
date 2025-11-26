@@ -73,4 +73,20 @@ public class PostService {
             return true;
         }
     }
+
+    public List<Post> getPostsByUserId(Integer userId){
+        return postRepository.getPostsByUserId(userId);
+    }
+
+    public List<Post> getPostsBeforeDate(LocalDateTime dateTime){
+        return postRepository.getPostsBeforeDate(dateTime);
+    }
+
+    public List<Post> getPostsByCategoryId(Integer categoryId){
+        return postRepository.getPostsByCategoryId(categoryId);
+    }
+
+    public List<Post> getPostsByTitleContain(String title){
+        return postRepository.findPostsByTitleContaining(title);
+    }
 }

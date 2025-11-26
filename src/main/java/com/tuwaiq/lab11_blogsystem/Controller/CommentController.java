@@ -79,4 +79,24 @@ public class CommentController {
             return ResponseEntity.status(400).body(new ApiResponse("There are no comments with this id found"));
         }
     }
+
+    @GetMapping("/get-comments-by-post-id/{postId}")
+    public ResponseEntity<?> getCommentsByPostId(@PathVariable Integer postId){
+        List<Comment> comments=commentService.getAllCommentByPostId(postId);
+        if (comments.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no comments for this post"));
+        }else {
+            return ResponseEntity.status(200).body(comments);
+        }
+    }
+
+    @GetMapping("/get-comments-by-user-id/{userId}")
+    public ResponseEntity<?> getCommentsByUserId(@PathVariable Integer userId){
+        List<Comment> comments=commentService.getAllCommentByUserId(userId);
+        if (comments.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no comments for this user"));
+        }else {
+            return ResponseEntity.status(200).body(comments);
+        }
+    }
 }

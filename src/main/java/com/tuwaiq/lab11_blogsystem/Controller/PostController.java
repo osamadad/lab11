@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -74,6 +75,46 @@ public class PostController {
             return ResponseEntity.status(200).body(new ApiResponse("The post have been deleted successfully"));
         }else {
             return ResponseEntity.status(400).body(new ApiResponse("There are no post with this id found"));
+        }
+    }
+
+    @GetMapping("get-posts-by-user-id/{userId}")
+    public ResponseEntity<?> getPostsByUserId(@PathVariable Integer userId){
+        List<Post> posts= postService.getPostsByUserId(userId);
+        if (posts.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no posts with this user id"));
+        }else {
+            return ResponseEntity.status(200).body(posts);
+        }
+    }
+
+    @GetMapping("/get-before-date/{dateTime}")
+    public ResponseEntity<?> getPostsBeforeDate(@PathVariable LocalDateTime dateTime){
+        List<Post> posts=postService.getPostsBeforeDate(dateTime);
+        if (posts.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no posts before this date"));
+        }else {
+            return ResponseEntity.status(200).body(posts);
+        }
+    }
+
+    @GetMapping("/get-posts-by-category-id/{categoryId}")
+    public ResponseEntity<?> getPostsByCategoryId(@PathVariable Integer categoryId){
+        List<Post> posts=postService.getPostsByCategoryId(categoryId);
+        if (posts.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no posts with this category"));
+        }else {
+            return ResponseEntity.status(200).body(posts);
+        }
+    }
+
+    @GetMapping("/get-posts-by-title-contain/{title}")
+    public ResponseEntity<?> getPostsByTitleContain(@PathVariable String title){
+        List<Post> posts=postService.getPostsByTitleContain(title);
+        if (posts.isEmpty()){
+            return ResponseEntity.status(400).body(new ApiResponse("There are no posts with title containing this part"));
+        }else {
+            return ResponseEntity.status(200).body(posts);
         }
     }
 }

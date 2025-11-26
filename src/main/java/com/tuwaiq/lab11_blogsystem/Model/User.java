@@ -32,7 +32,6 @@ public class User {
     @Size(min = 5, max = 25, message = "Sorry, the email can't be less than 5 or longer than 25 characters, please try again")
     @Column(columnDefinition = "varchar(25) not null unique")
     private String email;
-    @NotNull(message = "Sorry, the registration date can't be empty, please try again")
     @DateTimeFormat(pattern = "yyyy-MM-dd@HH-mm-ss")
     @Column(columnDefinition = "datetime not null")
     private LocalDateTime registrationDate;

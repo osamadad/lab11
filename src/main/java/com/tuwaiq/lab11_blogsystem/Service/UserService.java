@@ -1,6 +1,10 @@
 package com.tuwaiq.lab11_blogsystem.Service;
 
+import com.tuwaiq.lab11_blogsystem.Model.Comment;
+import com.tuwaiq.lab11_blogsystem.Model.Post;
 import com.tuwaiq.lab11_blogsystem.Model.User;
+import com.tuwaiq.lab11_blogsystem.Repository.CommentRepository;
+import com.tuwaiq.lab11_blogsystem.Repository.PostRepository;
 import com.tuwaiq.lab11_blogsystem.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +17,8 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
 
     public void addUser(User user){
         user.setRegistrationDate(LocalDateTime.now());
@@ -44,5 +50,18 @@ public class UserService {
             userRepository.delete(user);
             return true;
         }
+    }
+
+    public List<User> getUsersWithSpecificDomain(String emailDomain){
+        return userRepository.getUsersWithSpecificEmail(emailDomain);
+    }
+
+//    public List<User> getUnactiveUser(){
+//        List<Post> posts=postRepository.findAll();
+//        List<Comment> comments=commentRepository.findAll();
+//    }
+
+    public List<User> getUserByUsernameContaining(String name){
+        return userRepository.findUserByUsernameContaining(name);
     }
 }
