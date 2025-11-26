@@ -63,4 +63,14 @@ public class CommentService {
             return "comment id error";
         }
     }
+
+    public Boolean deleteComment(Integer id){
+        Comment comment=commentRepository.findCommentById(id);
+        if (comment==null){
+            return false;
+        }else {
+            commentRepository.delete(comment);
+            return true;
+        }
+    }
 }
